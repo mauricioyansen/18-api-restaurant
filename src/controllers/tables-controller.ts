@@ -1,8 +1,5 @@
 import { knex } from "@/database/knex";
-import { AppError } from "@/utils/AppError";
 import { Request, Response, NextFunction } from "express";
-import { Knex } from "knex";
-import z from "zod";
 
 class TablesController {
   async get(req: Request, res: Response, next: NextFunction) {

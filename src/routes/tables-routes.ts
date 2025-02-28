@@ -5,8 +5,5 @@ const tablesRoutes = Router();
 const tablesController = new TablesController();
 
 tablesRoutes.get("/", tablesController.get);
-// tablesRoutes.post("/", tablesController.create);
-// tablesRoutes.put("/:id", tablesController.update);
-// tablesRoutes.delete("/:id", tablesController.deleteById);
 
 export { tablesRoutes };
