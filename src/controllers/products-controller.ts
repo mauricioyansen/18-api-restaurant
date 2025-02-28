@@ -46,7 +46,7 @@ class ProductsController {
         .refine((value) => !isNaN(value), { message: "id must be a number" })
         .parse(req.params.id);
 
-      if (!idsArray.includes(id)) throw new AppError("Id must exist");
+      if (!idsArray.includes(id)) throw new AppError("Product not found", 404);
 
       const bodySchema = z.object({
         name: z.string().trim().min(6),
@@ -58,6 +58,27 @@ class ProductsController {
       await knex<ProductRepository>("products")
         .update({ name, price, updated_at: knex.fn.now() })
         .where({ id });
+
+      return res.json();
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deleteById(req: Request, res: Response, next: NextFunction) {
+    try {
+      const ids = await knex<ProductRepository>("products").select();
+      const idsArray = ids.map((index) => index.id);
+
+      const id = z
+        .string()
+        .transform((value) => Number(value))
+        .refine((value) => !isNaN(value), { message: "id must be a number" })
+        .parse(req.params.id);
+
+      if (!idsArray.includes(id)) throw new AppError("Product not found", 404);
+
+      await knex<ProductRepository>("products").delete().where({ id });
 
       return res.json();
     } catch (error) {
