@@ -1,9 +1,11 @@
 {
-  "name": "04-api-restaurant",
+  "name": "api-restaurant",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "dev": "tsx watch src/server.ts"
+    "dev": "tsx watch src/server.ts",
+    "knex2": "node --import tsx .node_modules/.bin/knex",
+    "knex": "tsx node_modules/knex/bin/cli.js"
   },
   "author": "Mauricio Yansen",
   "license": "ISC",
@@ -11,7 +13,9 @@
   "dependencies": {
     "@types/node": "^20.14.12",
     "express": "^4.19.2",
-    "tsx": "^4.16.2",
+    "knex": "^3.1.0",
+    "sqlite3": "^5.1.7",
+    "tsx": "^4.17.0",
     "typescript": "^5.5.4"
   },
   "devDependencies": {
